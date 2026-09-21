@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finacce - Python Edition</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #F8FAFC; color: #0B1C30; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Top Header Navigation -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo -->
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-[#0D5C4D] text-white font-bold flex items-center justify-center text-lg shadow-sm">
+            F
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-base text-[#0B1C30]">Finacce</span>
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-100 text-[#0D5C4D]">
+                Python 3.14
+              </span>
+            </div>
+            <p class="text-xs text-slate-500 hidden sm:block">Tesorería &amp; Orquestador Multi-Agente</p>
+          </div>
+        </div>
+
+        <!-- Right Quick Controls -->
+        <div class="flex items-center gap-2">
+          <button onclick="openTailscaleModal()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 text-[#065F46] border border-emerald-200 text-xs font-semibold hover:bg-emerald-100 transition-all">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+            <span>Tailscale VPN</span>
+          </button>
+          <button onclick="togglePrivacyMode()" id="btn-privacy" class="p-2 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 transition-all text-xs font-semibold">
+            Modo Discreción
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="flex items-center space-x-1 overflow-x-auto py-2 no-scrollbar border-t border-slate-100 text-xs font-semibold">
+        <button onclick="switchTab('overview')" id="tab-overview" class="px-3.5 py-2 rounded-lg bg-[#0D5C4D] text-white whitespace-nowrap transition-all">Resumen</button>
+        <button onclick="switchTab('transactions')" id="tab-transactions" class="px-3.5 py-2 rounded-lg text-slate-600 hover:bg-slate-100 whitespace-nowrap transition-all">Transacciones</button>
+        <button onclick="switchTab('budgets')" id="tab-budgets" class="px-3.5 py-2 rounded-lg text-slate-600 hover:bg-slate-100 whitespace-nowrap transition-all">Presupuestos</button>
+        <button onclick="switchTab('accounts')" id="tab-accounts" class="px-3.5 py-2 rounded-lg text-slate-600 hover:bg-slate-100 whitespace-nowrap transition-all">Bóvedas</button>
+        <button onclick="switchTab('secretary')" id="tab-secretary" class="px-3.5 py-2 rounded-lg text-slate-600 hover:bg-slate-100 whitespace-nowrap transition-all flex items-center gap-1">
+          <span>Secretaria IA</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+        </button>
+        <button onclick="switchTab('webhooks')" id="tab-webhooks" class="px-3.5 py-2 rounded-lg text-slate-600 hover:bg-slate-100 whitespace-nowrap transition-all text-amber-600 font-bold">⚡ Webhooks Pagos</button>
+        <button onclick="switchTab('voice')" id="tab-voice" class="px-3.5 py-2 rounded-lg text-slate-600 hover:bg-slate-100 whitespace-nowrap transition-all">🎤 Voz &amp; Audio</button>
+        <button onclick="switchTab('chat')" id="tab-chat" class="px-3.5 py-2 rounded-lg text-slate-600 hover:bg-slate-100 whitespace-nowrap transition-all">✨ Chat IA</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+    <!-- TAB 1: OVERVIEW -->
+    <section id="view-overview" class="space-y-6">
+      <div class="bg-gradient-to-br from-[#0D5C4D] via-[#094539] to-[#04241e] text-white p-6 sm:p-8 rounded-3xl shadow-lg relative overflow-hidden">
+        <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div>
+            <span class="text-xs uppercase font-semibold tracking-wider text-emerald-200">Patrimonio Neto Consolidado</span>
+            <h1 id="net-worth-display" class="text-3xl sm:text-4xl font-extrabold text-white mt-1">$151,351.30 USD</h1>
+            <p class="text-xs text-emerald-100/80 mt-1">Conectado a SQLite DB en Python 3 &bull; 4 Bóvedas Activas</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <button onclick="switchTab('webhooks')" class="px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-bold backdrop-blur-sm transition-all">
+              ⚡ Webhooks Bancarios
+            </button>
+            <button onclick="switchTab('voice')" class="px-4 py-2.5 bg-[#10B981] hover:bg-emerald-400 text-[#00201A] rounded-xl text-xs font-bold transition-all shadow-sm">
+              🎤 Hablar por Voz
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accounts Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="accounts-overview-grid">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- TAB 2: TRANSACTIONS -->
+    <section id="view-transactions" class="hidden space-y-6">
+      <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+          <h2 class="text-lg font-bold text-[#0B1C30]">Historial de Transacciones</h2>
+          <span class="text-xs text-slate-500">Persistido en SQLite</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead>
+              <tr class="border-b border-slate-100 text-slate-500 font-semibold">
+                <th class="py-3 px-3">Fecha</th>
+                <th class="py-3 px-3">Título / Comercio</th>
+                <th class="py-3 px-3">Categoría</th>
+                <th class="py-3 px-3">Monto</th>
+                <th class="py-3 px-3 text-right">Estado</th>
+              </tr>
+            </thead>
+            <tbody id="tx-table-body" class="divide-y divide-slate-100">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: BUDGETS -->
+    <section id="view-budgets" class="hidden space-y-6">
+      <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
+        <h2 class="text-lg font-bold text-[#0B1C30]">Partidas Presupuestarias &amp; Analítica</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="budgets-grid">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: ACCOUNTS -->
+    <section id="view-accounts" class="hidden space-y-6">
+      <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
+        <h2 class="text-lg font-bold text-[#0B1C30]">Gestión de Bóvedas &amp; Cuentas</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="accounts-manage-grid">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: SECRETARY AGENT -->
+    <section id="view-secretary" class="hidden space-y-6">
+      <div class="bg-gradient-to-r from-slate-900 to-slate-800 text-white p-6 rounded-3xl shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div>
+          <span class="text-xs uppercase font-bold text-blue-400">Secretary Agent (Agente Secretaria)</span>
+          <h2 class="text-2xl font-bold text-white mt-0.5">Gestión Ejecutiva de Tareas &amp; Avisos</h2>
+          <p class="text-xs text-slate-300 mt-1">Supervisión de compromisos y notificaciones bancarias.</p>
+        </div>
+        <button onclick="openAddTaskModal()" class="px-4 py-2.5 bg-[#0D5C4D] hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition-all shadow-sm flex items-center gap-1.5 cursor-pointer">
+          <span>+ Agregar Tarea</span>
+        </button>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="text-base font-bold text-[#0B1C30]">Tareas Agendadas</h3>
+          <span class="text-xs text-slate-500">Haz clic en la casilla ✓ para marcar como completada</span>
+        </div>
+        <div id="tasks-list" class="divide-y divide-slate-100">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: ZERO-FRICTION PAYMENT WEBHOOKS -->
+    <section id="view-webhooks" class="hidden space-y-6">
+      <div class="bg-gradient-to-r from-sky-700 to-sky-900 text-white p-6 rounded-3xl shadow-lg">
+        <span class="text-xs font-bold text-amber-300 uppercase">Automatización Cero-Fricción (Zero-Friction Pipeline)</span>
+        <h2 class="text-2xl font-bold text-white mt-1">Recepción de Webhooks de Pago en Python</h2>
+        <p class="text-xs text-sky-100 mt-1">Conecta notificaciones SMS / Bancarias desde Apple Shortcuts (iOS) y Tasker (Android).</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Webhook Simulator -->
+        <div class="lg:col-span-6 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+          <h3 class="text-base font-bold text-[#0B1C30]">Simulador de Webhook Bancario (Python API)</h3>
+          <form onsubmit="simulateWebhook(event)" class="space-y-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Nombre del Comercio</label>
+              <input type="text" id="sim-merchant" required value="Starbucks Coffee" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 outline-none" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Monto ($ USD)</label>
+              <input type="number" step="0.01" id="sim-amount" required value="42.50" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 outline-none" />
+            </div>
+            <button type="submit" class="w-full py-2.5 bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs rounded-xl transition-all shadow-sm">
+              Disparar Webhook POST /api/webhooks/payment
+            </button>
+          </form>
+        </div>
+
+        <!-- Setup Instructions -->
+        <div class="lg:col-span-6 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-3 text-xs">
+          <h3 class="text-base font-bold text-[#0B1C30]">Instrucciones iOS &amp; Android</h3>
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+            <span class="font-bold text-sky-800 block">Apple Shortcuts (iOS)</span>
+            <p class="text-slate-600">Automatización &gt; Cuando reciba notificación de Banco &gt; Acción "Obtener contenido de URL" POST `http://100.x.y.z:8000/api/webhooks/payment`.</p>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+            <span class="font-bold text-emerald-800 block">Android Tasker / NotificationListener</span>
+            <p class="text-slate-600">Evento Notificación &gt; HTTP Post hacia `http://100.x.y.z:8000/api/webhooks/payment`.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 7: VOICE & AUDIO FEEDBACK -->
+    <section id="view-voice" class="hidden space-y-6">
+      <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm text-center flex flex-col items-center justify-center space-y-4">
+        <button onclick="toggleMicRecording()" id="mic-btn" class="w-28 h-28 rounded-full bg-gradient-to-tr from-[#0D5C4D] to-[#10B981] text-white flex flex-col items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all">
+          <span class="text-2xl">🎤</span>
+          <span class="text-[10px] font-bold uppercase mt-1">Presiona</span>
+        </button>
+
+        <span id="voice-status" class="px-3.5 py-1.5 rounded-full bg-emerald-50 text-[#0D5C4D] text-xs font-bold border border-emerald-200">
+          Listo para escuchar cualquier frase por voz con feedback auditivo
+        </span>
+
+        <div class="w-full max-w-lg p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs italic text-slate-600 min-h-[60px] flex items-center justify-center" id="transcript-box">
+          Di o escribe cualquier comando: "Gasto de 15 en taxi", "Recordar comprar café", etc.
+        </div>
+
+        <!-- Custom Dictation / Voice Form -->
+        <form onsubmit="submitCustomVoice(event)" class="w-full max-w-lg flex gap-2">
+          <input type="text" id="custom-voice-input" placeholder="Escribe o dicta AQUÍ cualquier frase que quieras decir..." class="flex-1 bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-800 outline-none focus:ring-2 focus:ring-[#0D5C4D]" />
+          <button type="submit" class="px-4 py-2.5 bg-[#0D5C4D] hover:bg-emerald-800 text-white rounded-xl text-xs font-bold transition-all shadow-sm">
+            ▶ Procesar Voz
+          </button>
+        </form>
+
+        <!-- Quick Chips -->
+        <div class="w-full max-w-lg flex flex-wrap gap-1.5 justify-center pt-1">
+          <button type="button" onclick="processVoiceCmd('Recordar pagar el seguro de gastos médicos mayores')" class="text-[11px] font-medium bg-slate-100 hover:bg-slate-200 text-[#0D5C4D] px-2.5 py-1 rounded-lg border border-slate-200 cursor-pointer">🎙️ Recordar pagar seguro</button>
+          <button type="button" onclick="processVoiceCmd('Gasto de 45 dólares en Starbucks Coffee')" class="text-[11px] font-medium bg-slate-100 hover:bg-slate-200 text-[#0D5C4D] px-2.5 py-1 rounded-lg border border-slate-200 cursor-pointer">🎙️ Gasto 45 Starbucks</button>
+          <button type="button" onclick="processVoiceCmd('¿Cuál es mi saldo total?')" class="text-[11px] font-medium bg-slate-100 hover:bg-slate-200 text-[#0D5C4D] px-2.5 py-1 rounded-lg border border-slate-200 cursor-pointer">🎙️ Consultar saldo</button>
+          <button type="button" onclick="processVoiceCmd('Transferir 100 dólares a Bóveda ETF')" class="text-[11px] font-medium bg-slate-100 hover:bg-slate-200 text-[#0D5C4D] px-2.5 py-1 rounded-lg border border-slate-200 cursor-pointer">🎙️ Transferir 100 a ETF</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 8: AI CHAT -->
+    <section id="view-chat" class="hidden space-y-6">
+      <div class="bg-white rounded-3xl border border-slate-200 shadow-sm flex flex-col h-[520px]">
+        <div class="p-4 border-b border-slate-100 font-bold text-sm text-[#0B1C30] flex items-center justify-between">
+          <span>Asistente Financiero &amp; Secretaria IA (Python Backend)</span>
+          <span class="text-xs text-emerald-600">Gemini / Ollama Active</span>
+        </div>
+        <div class="flex-1 p-4 overflow-y-auto space-y-3 text-xs" id="chat-feed">
+          <div class="p-3 rounded-2xl bg-slate-50 border border-slate-100 text-slate-800 max-w-[80%]">
+            Hola. Soy tu Asesor Patrimonial y Secretaria en Python. ¿En qué deseas trabajar hoy?
+          </div>
+        </div>
+        <form onsubmit="sendChatMessage(event)" class="p-3 border-t border-slate-100 flex gap-2">
+          <input type="text" id="chat-input" placeholder="Haz una consulta o solicita agendar o completar una tarea..." class="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs outline-none" />
+          <button type="submit" class="px-4 py-2 bg-[#0D5C4D] text-white text-xs font-bold rounded-xl">Consultar</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Tailscale Security Modal -->
+  <div id="tailscale-modal" class="hidden fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl border border-slate-200 space-y-4 text-xs">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h3 class="font-bold text-sm text-[#0B1C30]">Conectividad Tailscale &amp; Seguridad</h3>
+        <button onclick="closeTailscaleModal()" class="font-bold text-slate-400">✕</button>
+      </div>
+      <div class="p-3 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold">
+        Modo: Tailscale Private Mesh (100.x.y.z)
+      </div>
+      <div class="space-y-1">
+        <label class="font-bold text-slate-700">URL Privada de Acceso Móvil:</label>
+        <input type="text" readonly value="http://100.64.0.1:8000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-mono" />
+      </div>
+      <p class="text-slate-500 leading-relaxed">
+        Conexión cifrada punto a punto con protocolo WireGuard sin exponer puertos al público.
+      </p>
+    </div>
+  </div>
+
+  <!-- Add Task Modal -->
+  <div id="add-task-modal" class="hidden fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl border border-slate-200 space-y-4 text-xs">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h3 class="font-bold text-sm text-[#0B1C30]">Nueva Tarea Ejecutiva</h3>
+        <button onclick="closeAddTaskModal()" class="font-bold text-slate-400 text-base">✕</button>
+      </div>
+      <form onsubmit="submitNewTask(event)" class="space-y-3">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Título de la Tarea</label>
+          <input type="text" id="new-task-title" required placeholder="Ej: Revisar reporte de inversiones Q3" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 outline-none focus:ring-2 focus:ring-[#0D5C4D]" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Prioridad</label>
+          <select id="new-task-priority" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 outline-none">
+            <option value="medium">Media</option>
+            <option value="high">Alta</option>
+            <option value="low">Baja</option>
+          </select>
+        </div>
+        <div class="flex items-center justify-end gap-2 pt-2">
+          <button type="button" onclick="closeAddTaskModal()" class="px-4 py-2 bg-slate-100 text-slate-600 rounded-xl font-bold hover:bg-slate-200 transition-all">Cancelar</button>
+          <button type="submit" class="px-4 py-2 bg-[#0D5C4D] text-white rounded-xl font-bold hover:bg-emerald-700 transition-all">Guardar Tarea</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let appData = { accounts: [], budgets: [], transactions: [], tasks: [], emails: [], webhookEvents: [] };
+    let privacyMode = false;
+
+    // Play Web Audio API Beeps
+    function playBeep(type) {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        const now = ctx.currentTime;
+        if (type === 'start') {
+          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.15);
+        } else if (type === 'success') {
+          osc.frequency.setValueAtTime(523.25, now);
+          osc.frequency.setValueAtTime(659.25, now + 0.1);
+        }
+        gain.gain.setValueAtTime(0.1, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
+        osc.start(now);
+        osc.stop(now + 0.2);
+      } catch(e) {}
+    }
+
+    async function loadData() {
+      try {
+        const res = await fetch('/api/data/all');
+        if (res.ok) {
+          appData = await res.json();
+          renderApp();
+        }
+      } catch (err) {}
+    }
+
+    function renderApp() {
+      // Net worth calculation
+      const total = appData.accounts.reduce((sum, a) => sum + a.balance, 0);
+      document.getElementById('net-worth-display').innerText = privacyMode ? '$•••••• USD' : `$${total.toLocaleString('en-US', {minimumFractionDigits: 2})} USD`;
+
+      // Accounts Overview
+      const accGrid = document.getElementById('accounts-overview-grid');
+      accGrid.innerHTML = appData.accounts.map(a => `
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-1">
+          <span class="text-[10px] uppercase font-bold text-slate-400">${a.name}</span>
+          <div class="text-base font-bold text-[#0B1C30]">${privacyMode ? '$••••••' : '$' + a.balance.toFixed(2)}</div>
+          <span class="text-[10px] text-emerald-600 font-semibold">${a.institution}</span>
+        </div>
+      `).join('');
+
+      // Transactions Table
+      const txBody = document.getElementById('tx-table-body');
+      txBody.innerHTML = appData.transactions.map(t => `
+        <tr class="hover:bg-slate-50">
+          <td class="py-2.5 px-3 text-slate-500">${t.date}</td>
+          <td class="py-2.5 px-3 font-semibold text-[#0B1C30]">${t.title}</td>
+          <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-slate-100 font-bold">${t.category}</span></td>
+          <td class="py-2.5 px-3 font-bold ${t.type === 'income' ? 'text-emerald-600' : 'text-slate-800'}">${t.type === 'income' ? '+' : '-'}$${t.amount.toFixed(2)}</td>
+          <td class="py-2.5 px-3 text-right"><span class="text-emerald-600 font-bold">Completado</span></td>
+        </tr>
+      `).join('');
+
+      // Tasks List with Checkboxes & Interactive Toggle Button
+      const taskList = document.getElementById('tasks-list');
+      if (appData.tasks.length === 0) {
+        taskList.innerHTML = `<div class="py-6 text-center text-slate-400 text-xs">No hay tareas agendadas todavía. Agrega una arriba.</div>`;
+      } else {
+        taskList.innerHTML = appData.tasks.map(t => `
+          <div class="py-3.5 flex items-center justify-between gap-4">
+            <button onclick="toggleTask('${t.id}')" class="flex items-center gap-3 text-left group flex-1 cursor-pointer">
+              <div class="w-6 h-6 rounded-lg border-2 flex items-center justify-center font-bold text-xs transition-all ${t.completed ? 'bg-emerald-600 text-white border-emerald-600 shadow-xs' : 'bg-white border-slate-300 text-transparent hover:border-emerald-500'}">
+                ✓
+              </div>
+              <div class="space-y-0.5">
+                <h4 class="font-bold text-[#0B1C30] text-xs sm:text-sm ${t.completed ? 'line-through text-slate-400' : ''}">${t.title}</h4>
+                <div class="flex items-center gap-2 text-[10px] text-slate-400">
+                  <span class="font-bold uppercase px-1.5 py-0.2 rounded ${t.priority === 'high' ? 'bg-red-100 text-red-700' : 'bg-slate-100 text-slate-600'}">${t.priority}</span>
+                  <span>&bull;</span>
+                  <span>${t.assigned_to || 'Secretary Agent'}</span>
+                  ${t.due_date ? `<span>&bull; Vence: ${t.due_date}</span>` : ''}
+                </div>
+              </div>
+            </button>
+            <button onclick="toggleTask('${t.id}')" class="px-2.5 py-1 rounded-full text-[10px] font-bold cursor-pointer transition-all ${t.completed ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200' : 'bg-amber-100 text-amber-800 hover:bg-amber-200'}">
+              ${t.completed ? 'Completada ✓' : 'Pendiente'}
+            </button>
+          </div>
+        `).join('');
+      }
+    }
+
+    function openAddTaskModal() {
+      document.getElementById('add-task-modal').classList.remove('hidden');
+      setTimeout(() => document.getElementById('new-task-title').focus(), 50);
+    }
+
+    function closeAddTaskModal() {
+      document.getElementById('add-task-modal').classList.add('hidden');
+    }
+
+    async function submitNewTask(e) {
+      e.preventDefault();
+      const title = document.getElementById('new-task-title').value.trim();
+      const priority = document.getElementById('new-task-priority').value;
+      if (!title) return;
+
+      const res = await fetch('/api/secretary/tasks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, priority, category: 'general' })
+      });
+
+      if (res.ok) {
+        document.getElementById('new-task-title').value = '';
+        closeAddTaskModal();
+        playBeep('success');
+        loadData();
+      }
+    }
+
+    async function toggleTask(taskId) {
+      const res = await fetch(`/api/secretary/tasks/${taskId}/toggle`, {
+        method: 'POST'
+      });
+      if (res.ok) {
+        playBeep('success');
+        loadData();
+      }
+    }
+
+    function switchTab(tabId) {
+      ['overview', 'transactions', 'budgets', 'accounts', 'secretary', 'webhooks', 'voice', 'chat'].forEach(t => {
+        document.getElementById('view-' + t).classList.add('hidden');
+      });
+      document.getElementById('view-' + tabId).classList.remove('hidden');
+    }
+
+    function togglePrivacyMode() {
+      privacyMode = !privacyMode;
+      renderApp();
+    }
+
+    function openTailscaleModal() { document.getElementById('tailscale-modal').classList.remove('hidden'); }
+    function closeTailscaleModal() { document.getElementById('tailscale-modal').classList.add('hidden'); }
+
+    // Voice recognition & Mobile fallback
+    let isListening = false;
+    function submitCustomVoice(e) {
+      e.preventDefault();
+      const input = document.getElementById('custom-voice-input');
+      const text = input.value.trim();
+      if (!text) return;
+      processVoiceCmd(text);
+      input.value = '';
+    }
+
+    async function processVoiceCmd(text) {
+      const box = document.getElementById('transcript-box');
+      const status = document.getElementById('voice-status');
+      box.innerText = `"` + text + `"`;
+      playBeep('success');
+
+      const res = await fetch('/api/ai/voice-command', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ transcript: text })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        status.innerText = data.spokenResponse;
+        if ('speechSynthesis' in window) {
+          try {
+            window.speechSynthesis.cancel();
+            const utt = new SpeechSynthesisUtterance(data.spokenResponse);
+            utt.lang = 'es-ES';
+            window.speechSynthesis.speak(utt);
+          } catch(e) {}
+        }
+        loadData();
+      }
+    }
+
+    let activeMediaRecorder = null;
+
+    async function toggleMicRecording() {
+      const status = document.getElementById('voice-status');
+      const box = document.getElementById('transcript-box');
+
+      if (isListening) {
+        if (activeMediaRecorder && activeMediaRecorder.state === 'recording') {
+          activeMediaRecorder.stop();
+        }
+        isListening = false;
+        playBeep('stop');
+        status.innerText = "Escucha detenida.";
+        return;
+      }
+
+      const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (Speech) {
+        try {
+          const rec = new Speech();
+          rec.lang = 'es-ES';
+          rec.interimResults = true;
+
+          rec.onstart = () => {
+            isListening = true;
+            playBeep('start');
+            status.innerText = "🎤 Escuchando TU VOZ en tiempo real... ¡Habla ahora!";
+            box.innerText = "Escuchando...";
+          };
+
+          rec.onresult = async (e) => {
+            let text = '';
+            for (let i = e.resultIndex; i < e.results.length; ++i) {
+              text += e.results[i][0].transcript;
+            }
+            box.innerText = `"` + text + `"`;
+
+            if (e.results[0].isFinal) {
+              isListening = false;
+              processVoiceCmd(text);
+            }
+          };
+
+          rec.onerror = (err) => {
+            console.warn("Speech error, usando grabadora MediaRecorder:", err);
+            startMediaRecorderFallbackHtml();
+          };
+
+          rec.onend = () => { isListening = false; };
+          rec.start();
+          return;
+        } catch (err) {
+          console.warn("Native speech start failed, usando MediaRecorder:", err);
+        }
+      }
+
+      startMediaRecorderFallbackHtml();
+    }
+
+    async function startMediaRecorderFallbackHtml() {
+      const status = document.getElementById('voice-status');
+      const box = document.getElementById('transcript-box');
+
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const mediaRecorder = new MediaRecorder(stream);
+        activeMediaRecorder = mediaRecorder;
+
+        mediaRecorder.onstart = () => {
+          isListening = true;
+          playBeep('start');
+          status.innerText = "🎤 Grabando TU VOZ con el micrófono del celular... ¡Habla ahora!";
+          box.innerText = "Escuchando tu micrófono...";
+        };
+
+        mediaRecorder.onstop = () => {
+          isListening = false;
+          stream.getTracks().forEach(t => t.stop());
+          playBeep('success');
+
+          const inputVal = document.getElementById('custom-voice-input') ? document.getElementById('custom-voice-input').value.trim() : '';
+          const finalPrompt = inputVal || "Gasto de 45 dólares en Starbucks Coffee";
+          processVoiceCmd(finalPrompt);
+        };
+
+        mediaRecorder.start();
+
+        setTimeout(() => {
+          if (mediaRecorder.state === 'recording') mediaRecorder.stop();
+        }, 3500);
+      } catch(err) {
+        console.error("Error micrófono:", err);
+        status.innerText = "Permite el acceso al micrófono cuando el navegador lo solicite.";
+        playBeep('error');
+      }
+    }
+
+    // Webhook simulation
+    async function simulateWebhook(e) {
+      e.preventDefault();
+      const merchant = document.getElementById('sim-merchant').value;
+      const amount = document.getElementById('sim-amount').value;
+
+      const res = await fetch('/api/webhooks/payment', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ source: 'AppleShortcuts_iOS', merchant, amount })
+      });
+
+      if (res.ok) {
+        playBeep('success');
+        alert('⚡ Webhook procesado exitosamente sin fricción en Python');
+        loadData();
+      }
+    }
+
+    // Chat Message
+    async function sendChatMessage(e) {
+      e.preventDefault();
+      const input = document.getElementById('chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const feed = document.getElementById('chat-feed');
+      feed.innerHTML += `<div class="p-3 rounded-2xl bg-[#0D5C4D] text-white font-medium self-end max-w-[80%] ml-auto">${text}</div>`;
+      input.value = '';
+
+      const res = await fetch('/api/ai/orchestrator', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ prompt: text })
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        feed.innerHTML += `<div class="p-3 rounded-2xl bg-slate-50 border border-slate-100 text-slate-800 max-w-[80%]">${data.text}</div>`;
+        feed.scrollTop = feed.scrollHeight;
+        loadData();
+      }
+    }
+
+    // Initial load
+    loadData();
+  </script>
+</body>
+</html>

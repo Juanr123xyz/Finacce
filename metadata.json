@@ -1,0 +1,7 @@
+{
+  "name": "Modern Wealth & Balance",
+  "description": "Plataforma moderna de gestión patrimonial, presupuestos, flujo de caja y balances financieros.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

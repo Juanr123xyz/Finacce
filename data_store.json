@@ -1,0 +1,415 @@
+{
+  "accounts": [
+    {
+      "id": "acc_checking",
+      "name": "Cuenta Operativa Principal",
+      "type": "checking",
+      "accountNumberMasked": "•••• 4829",
+      "balance": 14150.8,
+      "currency": "USD",
+      "institution": "Apex Wealth Reserve",
+      "color": "#0D5C4D",
+      "cardFrozen": false
+    },
+    {
+      "id": "acc_vault",
+      "name": "Bóveda Inversión Global ETF",
+      "type": "investment",
+      "accountNumberMasked": "•••• 9104",
+      "balance": 86420.5,
+      "currency": "USD",
+      "apy": 8.4,
+      "institution": "Vanguard Treasury Custody",
+      "color": "#1E293B"
+    },
+    {
+      "id": "acc_high_yield",
+      "name": "Reserva Rendimiento Alto (HYSA)",
+      "type": "savings",
+      "accountNumberMasked": "•••• 3317",
+      "balance": 32180,
+      "currency": "USD",
+      "apy": 4.85,
+      "institution": "Goldman Sachs Marcus",
+      "color": "#10B981"
+    },
+    {
+      "id": "acc_emergency",
+      "name": "Fondo de Estabilidad & Oportunidad",
+      "type": "savings",
+      "accountNumberMasked": "•••• 6021",
+      "balance": 18500,
+      "currency": "USD",
+      "apy": 4.5,
+      "institution": "Apex Liquidity Safe",
+      "color": "#545F73"
+    }
+  ],
+  "budgets": [
+    {
+      "id": "b_housing",
+      "category": "housing",
+      "label": "Vivienda & Mantenimiento",
+      "allocatedAmount": 1850,
+      "period": "monthly",
+      "color": "#4F46E5"
+    },
+    {
+      "id": "b_food",
+      "category": "food_dining",
+      "label": "Gastronomía & Mercado Orgánico",
+      "allocatedAmount": 750,
+      "period": "monthly",
+      "color": "#D97706"
+    },
+    {
+      "id": "b_tech",
+      "category": "technology",
+      "label": "Software, Infraestructura & IA",
+      "allocatedAmount": 320,
+      "period": "monthly",
+      "color": "#7C3AED"
+    },
+    {
+      "id": "b_leisure",
+      "category": "leisure",
+      "label": "Ocio, Viajes & Experiencias",
+      "allocatedAmount": 500,
+      "period": "monthly",
+      "color": "#DB2777"
+    },
+    {
+      "id": "b_transport",
+      "category": "transport",
+      "label": "Transporte & Movilidad Verde",
+      "allocatedAmount": 280,
+      "period": "monthly",
+      "color": "#0284C7"
+    },
+    {
+      "id": "b_health",
+      "category": "health",
+      "label": "Salud, Deporte & Suplementación",
+      "allocatedAmount": 220,
+      "period": "monthly",
+      "color": "#0D9488"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "tx_auto_1789956977839",
+      "title": "Pago Automático: Uber Eats",
+      "amount": 50,
+      "type": "expense",
+      "category": "food_dining",
+      "accountId": "acc_checking",
+      "date": "2026-09-21",
+      "time": "21:16",
+      "merchant": "Uber Eats",
+      "notes": "Registrado automáticamente via Webhook (AppleShortcuts_iOS): \"{\"merchant\":\"Uber Eats\",\"amount\":50,\"source\":\"AppleShortcuts_iOS\"}\"",
+      "status": "completed"
+    },
+    {
+      "id": "tx_auto_1789956172554",
+      "title": "Pago Automático: Uber Eats",
+      "amount": 50,
+      "type": "expense",
+      "category": "food_dining",
+      "accountId": "acc_checking",
+      "date": "2026-09-21",
+      "time": "21:02",
+      "merchant": "Uber Eats",
+      "notes": "Registrado automáticamente via Webhook (AppleShortcuts_iOS): \"{\"merchant\":\"Uber Eats\",\"amount\":50,\"source\":\"AppleShortcuts_iOS\"}\"",
+      "status": "completed"
+    },
+    {
+      "id": "tx_01",
+      "title": "Nómina Ejecutiva & Dividendos",
+      "amount": 6850,
+      "type": "income",
+      "category": "salary",
+      "accountId": "acc_checking",
+      "date": "2026-09-15",
+      "time": "09:30",
+      "merchant": "Anthropic Labs / Meridian Partners",
+      "notes": "Abono mensual + retribución variable",
+      "status": "completed"
+    },
+    {
+      "id": "tx_02",
+      "title": "Aporte Automático Bóveda S&P 500",
+      "amount": 1500,
+      "type": "transfer",
+      "category": "investments",
+      "accountId": "acc_checking",
+      "toAccountId": "acc_vault",
+      "date": "2026-09-14",
+      "time": "14:20",
+      "merchant": "Vanguard Global Assets",
+      "notes": "DCA mensual sistemático",
+      "status": "completed"
+    },
+    {
+      "id": "tx_03",
+      "title": "Mercado Artesanal & Especialidades",
+      "amount": 142.6,
+      "type": "expense",
+      "category": "food_dining",
+      "accountId": "acc_checking",
+      "date": "2026-09-14",
+      "time": "18:45",
+      "merchant": "Whole Foods Market",
+      "notes": "Aprovisionamiento semanal",
+      "status": "completed"
+    },
+    {
+      "id": "tx_04",
+      "title": "Cena de Trabajo & Maridaje",
+      "amount": 215.3,
+      "type": "expense",
+      "category": "food_dining",
+      "accountId": "acc_checking",
+      "date": "2026-09-13",
+      "time": "21:10",
+      "merchant": "Restaurante Aürt",
+      "notes": "Reunión estratégica socios",
+      "status": "completed"
+    },
+    {
+      "id": "tx_05",
+      "title": "Rendimiento Mensual Intereses HYSA",
+      "amount": 129.88,
+      "type": "income",
+      "category": "investments",
+      "accountId": "acc_high_yield",
+      "date": "2026-09-12",
+      "time": "04:00",
+      "merchant": "Marcus High Yield Yields",
+      "notes": "Interés devengado APY 4.85%",
+      "status": "completed"
+    },
+    {
+      "id": "tx_06",
+      "title": "Suscripción Cloud Dev & Gemini Pro",
+      "amount": 84,
+      "type": "expense",
+      "category": "technology",
+      "accountId": "acc_checking",
+      "date": "2026-09-11",
+      "time": "11:15",
+      "merchant": "Google Cloud Platform",
+      "notes": "Servicios compute & storage",
+      "status": "completed"
+    },
+    {
+      "id": "tx_07",
+      "title": "Recarga Vehículo Eléctrico Tesla Supercharger",
+      "amount": 38.5,
+      "type": "expense",
+      "category": "transport",
+      "accountId": "acc_checking",
+      "date": "2026-09-10",
+      "time": "16:40",
+      "merchant": "Tesla Supercharging Network",
+      "notes": "Carga rápida 48 kWh",
+      "status": "completed"
+    },
+    {
+      "id": "tx_08",
+      "title": "Cuota Arrendamiento & Condominio",
+      "amount": 1450,
+      "type": "expense",
+      "category": "housing",
+      "accountId": "acc_checking",
+      "date": "2026-09-05",
+      "time": "08:00",
+      "merchant": "Metropolitan Real Estate",
+      "notes": "Pago periódico mensual",
+      "status": "completed"
+    },
+    {
+      "id": "tx_09",
+      "title": "Gimnasio & Centro de Recuperación",
+      "amount": 110,
+      "type": "expense",
+      "category": "health",
+      "accountId": "acc_checking",
+      "date": "2026-09-03",
+      "time": "10:00",
+      "merchant": "Equinox Wellness Club",
+      "notes": "Membresía mensual con spa y sauna",
+      "status": "completed"
+    },
+    {
+      "id": "tx_10",
+      "title": "Boletos de Tren Alta Velocidad",
+      "amount": 135,
+      "type": "expense",
+      "category": "leisure",
+      "accountId": "acc_checking",
+      "date": "2026-09-01",
+      "time": "12:30",
+      "merchant": "Iryo Alta Velocidad",
+      "notes": "Escapada fin de semana",
+      "status": "completed"
+    },
+    {
+      "id": "tx_11",
+      "title": "Dividendo Trimestral Vanguard FTSE All-World",
+      "amount": 412.5,
+      "type": "income",
+      "category": "investments",
+      "accountId": "acc_vault",
+      "date": "2026-08-28",
+      "time": "09:00",
+      "merchant": "Vanguard Fund Services",
+      "notes": "Reinversión automática opcional",
+      "status": "completed"
+    }
+  ],
+  "tasks": [
+    {
+      "title": "Terminar pro",
+      "priority": "medium",
+      "category": "general",
+      "completed": true,
+      "assignedTo": "Secretary Agent",
+      "id": "task_1789956911177",
+      "createdAt": "20/9/2026, 21:15:11"
+    },
+    {
+      "title": "Terminar  proyecto",
+      "priority": "medium",
+      "category": "general",
+      "completed": true,
+      "assignedTo": "Secretary Agent",
+      "id": "task_1789956780846",
+      "createdAt": "20/9/2026, 21:13:00"
+    },
+    {
+      "title": "Terminar   sarrollo móvil",
+      "priority": "medium",
+      "category": "general",
+      "completed": true,
+      "assignedTo": "Secretary Agent",
+      "id": "task_1789956060268",
+      "createdAt": "20/9/2026, 21:01:00"
+    },
+    {
+      "id": "task_01",
+      "title": "Revisar reporte de rendimiento mensual Bóveda Vanguard",
+      "description": "Analizar asignación de activos e interés compuesto con el Agente Financiero",
+      "dueDate": "2026-09-18",
+      "priority": "high",
+      "category": "finances",
+      "completed": true,
+      "assignedTo": "Secretary Agent",
+      "createdAt": "2026-09-15 10:00"
+    },
+    {
+      "id": "task_02",
+      "title": "Programar pago de seguro de gastos médicos mayores",
+      "description": "Verificar cuota aprobada en presupuesto de salud",
+      "dueDate": "2026-09-20",
+      "priority": "medium",
+      "category": "bills",
+      "completed": true,
+      "assignedTo": "Secretary Agent",
+      "createdAt": "2026-09-14 15:30"
+    },
+    {
+      "id": "task_03",
+      "title": "Organizar comprobantes de deducciones de impuestos Q3",
+      "description": "Archivar notificaciones bancarias recibidas via Webhook",
+      "dueDate": "2026-09-25",
+      "priority": "low",
+      "category": "taxes",
+      "completed": true,
+      "assignedTo": "Secretary Agent",
+      "createdAt": "2026-09-10 09:15"
+    }
+  ],
+  "emails": [
+    {
+      "sender": "webhook@appleshortcuts_ios.system",
+      "subject": "[Zero-Friction] Pago Automático Detectado $50.00",
+      "body": "Se ha registrado automáticamente la compra en Uber Eats de $50.00 sin intervención manual.",
+      "category": "bank_alert",
+      "isRead": false,
+      "actionTaken": "Transacción tx_auto_1789956977839 creada en Cuenta Operativa",
+      "id": "email_1789956977843",
+      "receivedAt": "20/9/2026, 21:16:17"
+    },
+    {
+      "sender": "webhook@appleshortcuts_ios.system",
+      "subject": "[Zero-Friction] Pago Automático Detectado $50.00",
+      "body": "Se ha registrado automáticamente la compra en Uber Eats de $50.00 sin intervención manual.",
+      "category": "bank_alert",
+      "isRead": false,
+      "actionTaken": "Transacción tx_auto_1789956172554 creada en Cuenta Operativa",
+      "id": "email_1789956172558",
+      "receivedAt": "20/9/2026, 21:02:52"
+    },
+    {
+      "id": "email_01",
+      "sender": "notificaciones@apexwealth.com",
+      "subject": "Aviso de Pago Automático: Mercado Orgánico $142.60",
+      "body": "Se ha procesado exitosamente la transacción con su tarjeta de débito terminación 4829.",
+      "category": "bank_alert",
+      "isRead": true,
+      "actionTaken": "Registrado automáticamente en Finanzas",
+      "receivedAt": "2026-09-14 18:46"
+    },
+    {
+      "id": "email_02",
+      "sender": "servicios@vanguardtreasury.com",
+      "subject": "Estado de Cuenta Trimestral Disponible - Bóveda ETF",
+      "body": "Su resumen de inversión del periodo anterior se encuentra listo para descarga.",
+      "category": "receipt",
+      "isRead": false,
+      "receivedAt": "2026-09-13 11:20"
+    },
+    {
+      "id": "email_03",
+      "sender": "secretaria.ai@modernwealth.app",
+      "subject": "Recordatorio Agendado: Revisión de Partida de Ocio",
+      "body": "Has alcanzado el 70% del límite presupuestado en la partida Ocio & Experiencias.",
+      "category": "reminder",
+      "isRead": false,
+      "actionTaken": "Alerta enviada al usuario",
+      "receivedAt": "2026-09-12 08:00"
+    }
+  ],
+  "webhookEvents": [
+    {
+      "source": "AppleShortcuts_iOS",
+      "payload": "{\"merchant\":\"Uber Eats\",\"amount\":50,\"source\":\"AppleShortcuts_iOS\"}",
+      "parsedAmount": 50,
+      "parsedMerchant": "Uber Eats",
+      "status": "processed",
+      "transactionId": "tx_auto_1789956977839",
+      "id": "wh_1789956977841",
+      "createdAt": "20/9/2026, 21:16:17"
+    },
+    {
+      "source": "AppleShortcuts_iOS",
+      "payload": "{\"merchant\":\"Uber Eats\",\"amount\":50,\"source\":\"AppleShortcuts_iOS\"}",
+      "parsedAmount": 50,
+      "parsedMerchant": "Uber Eats",
+      "status": "processed",
+      "transactionId": "tx_auto_1789956172554",
+      "id": "wh_1789956172557",
+      "createdAt": "20/9/2026, 21:02:52"
+    },
+    {
+      "id": "wh_init_1",
+      "source": "AppleShortcuts_iOS",
+      "payload": "Notificación Bancaria: Compra autorizada por $45.00 en Starbucks Coffee con tarjeta 4829",
+      "parsedAmount": 45,
+      "parsedMerchant": "Starbucks Coffee",
+      "status": "processed",
+      "transactionId": "tx_03",
+      "createdAt": "2026-09-15 14:10"
+    }
+  ]
+}
