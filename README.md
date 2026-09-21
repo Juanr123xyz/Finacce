@@ -170,4 +170,3 @@ El esquema PostgreSQL/Supabase se encuentra en `supabase/schema.sql` y el de SQL
    - *"Recordar pagar el seguro de gastos médicos mayores"* ➔ Responde **Secretary Agent** en audio y registra la tarea.
    - *"Gasto de 45 dólares en Starbucks Coffee"* ➔ Responde **Financial Agent** en audio y descuenta el saldo.
 3. ⏱️ **Minuto 2:15 - 3:30 (Webhook Zero-Friction)**: Tocar el botón de simulación o Atajo de iOS. Explicar el registro automático en la base de datos sin intervención manual.
-4. ⏱️ **Minuto 3:30 - 4:30 (Persistencia y Logs)**: Mostrar consola backend en el PC recibiendo peticiones HTTP desde la IP del celular y consultar la base de datos relacional.
