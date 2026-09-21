@@ -1,4 +1,4 @@
-# Finacce 🏦🤖
+# Finacce 
 > **Plataforma Inteligente de Gestión Patrimonial, Orquestación Multi-Agente, Automatización Zero-Friction de Pagos y Conectividad Segura Tailscale.**
 
 ---
